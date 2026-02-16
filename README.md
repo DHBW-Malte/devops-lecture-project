@@ -17,6 +17,7 @@ This repository follows the **GitHub Flow**, which means:
   * **Fixing Branches:** `fix/<bug>`
   * **Maintenance Branches:** `chore/maintenance`
   * **Documentation Branches:** `docs/<topic>`
+  * **Refactoring Branches:** `refactor/<short description>`
 
 ### Commits
 
