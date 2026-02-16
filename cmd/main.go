@@ -14,19 +14,6 @@ import (
 
 var secretKey = []byte("secret-key")
 
-type Product struct {
-	ID    int     `json:"id"`
-	Name  string  `json:"name"`
-	Price float64 `json:"price"`
-}
-
-// Static data for three products
-var products = []Product{
-	{ID: 1, Name: "Product 1", Price: 19.99},
-	{ID: 2, Name: "Product 2", Price: 29.99},
-	{ID: 3, Name: "Product 3", Price: 39.99},
-}
-
 func main() {
 	mux := http.NewServeMux()
 	// Auth Service
@@ -76,53 +63,6 @@ func authLogoutHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	// In this simple example, we'll just return a success message
 	w.Write([]byte(`{"message": "Logout successful"}`))
-}
-
-func productListHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	response, err := json.Marshal(products)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"error": "Internal Server Error"}`))
-		return
-	}
-	w.Write(response)
-}
-
-func productDetailHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-
-	idStr := r.PathValue("id")
-
-	id, err := strconv.Atoi(idStr)
-	if err != nil {
-		http.Error(w, `{"error":"Product ID has wrong format"}`, http.StatusBadRequest)
-		return
-	}
-
-	product := findProductByID(products, id)
-	if product == nil {
-		http.Error(w, `{"error":"Product not found"}`, http.StatusNotFound)
-		return
-	}
-
-	resp, err := json.Marshal(product)
-	if err != nil {
-		http.Error(w, `{"error":"Internal Server Error"}`, http.StatusInternalServerError)
-		return
-	}
-
-	w.Write(resp)
 }
 
 func checkoutPlaceOrderHandler(w http.ResponseWriter, r *http.Request) {
@@ -180,13 +120,4 @@ func verifyToken(tokenString string) bool {
 	})
 
 	return err == nil && token.Valid
-}
-
-func findProductByID(products []Product, id int) *Product {
-	for _, product := range products {
-		if product.ID == id {
-			return &product
-		}
-	}
-	return nil
 }
