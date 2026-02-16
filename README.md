@@ -1,6 +1,8 @@
 # devops-lecture-project-2025
 ---
+
 Casimir Bomans & Malte Opderbeck
+
 ---
 
 ## Branch & Commit Guide
