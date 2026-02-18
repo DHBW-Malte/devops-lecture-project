@@ -1,15 +1,12 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"strings"
-	"time"
 
-	"github.com/golang-jwt/jwt/v5"
+	"github.com/DHBW-Malte/devops-lecture-project/internal/handler"
 )
 
 var secretKey = []byte("secret-key")
@@ -17,52 +14,16 @@ var secretKey = []byte("secret-key")
 func main() {
 	mux := http.NewServeMux()
 	// Auth Service
-	mux.HandleFunc("/auth/login", authLoginHandler)
-	mux.HandleFunc("/auth/logout", authLogoutHandler)
+	mux.HandleFunc("/auth/login", handler.AuthLoginHandler)
+	mux.HandleFunc("/auth/logout", handler.AuthLogoutHandler)
 	// Product Service
-	mux.HandleFunc("/products", productListHandler)
-	mux.HandleFunc("/products/{id}", productDetailHandler)
+	mux.HandleFunc("/products", handler.ProductListHandler)
+	mux.HandleFunc("/products/{id}", handler.ProductListHandler)
 	// Checkout Service
 	mux.HandleFunc("/checkout/placeorder", checkoutPlaceOrderHandler)
 	port := 8080
 	log.Printf("Server is running on port %d...\n", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), mux))
-}
-
-func authLoginHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	username := r.FormValue("username")
-	password := r.FormValue("password")
-	// For simplicity, we'll use a hardcoded username and password
-	// This should be replaced with a proper authentication mechanism
-	if username == "user" && password == "pass" {
-		token, err := createToken(username)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(`{"error": "Error generating the token"}`))
-			return
-		}
-		w.Write([]byte(fmt.Sprintf(`{"token": "%s"}`, token)))
-	} else {
-		w.WriteHeader(http.StatusUnauthorized)
-		w.Write([]byte(`{"error": "Invalid credentials"}`))
-	}
-}
-
-func authLogoutHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
-		return
-	}
-
-	w.Header().Set("Content-Type", "application/json")
-	// In this simple example, we'll just return a success message
-	w.Write([]byte(`{"message": "Logout successful"}`))
 }
 
 func checkoutPlaceOrderHandler(w http.ResponseWriter, r *http.Request) {
@@ -96,28 +57,4 @@ func checkoutPlaceOrderHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write([]byte(`{"message":"Order placed successfully"}`))
-}
-
-func createToken(username string) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256,
-		jwt.MapClaims{
-			"username": username,
-			"exp":      time.Now().Add(time.Hour * 24).Unix(),
-		})
-	tokenString, err := token.SignedString(secretKey)
-	if err != nil {
-		return "", err
-	}
-	return tokenString, nil
-}
-
-func verifyToken(tokenString string) bool {
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
-		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("unexpected signing method")
-		}
-		return secretKey, nil
-	})
-
-	return err == nil && token.Valid
 }
