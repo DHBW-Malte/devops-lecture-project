@@ -45,21 +45,18 @@ The devops-shop is now available as a container image on Docker Hub.
 
 ### Pull the image
 
-```
 ```bash 
 docker pull dhbwmalte/devpos-shop:v0.1.0
 ```
-```
-```
+
 
 ### Run the container 
 
 
-```
 ```bash 
 docker run --rm -p 8080:8080 dhbwmalte/devpos-shop:v0.1.0
 ```
-```
+
 
 The shop will be available at:
 `http://localhost:8080`
@@ -72,7 +69,4 @@ If you prefere to build the image yourself:
 docker build -t devops-shop:local .
 docker run --rm -p 8080:8080 devops-shop:local
 ```
-```
-```
-```
-```
+---
