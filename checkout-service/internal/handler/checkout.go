@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/DHBW-Malte/devops-lecture-project/internal/service"
+	"github.com/DHBW-Malte/devops-lecture-project/checkout-service/internal/service"
 	"github.com/DHBW-Malte/devops-lecture-project/pkg/httpx"
 )
 

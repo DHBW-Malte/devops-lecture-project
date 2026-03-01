@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/DHBW-Malte/devops-lecture-project/internal/service"
+	"github.com/DHBW-Malte/devops-lecture-project/auth-service/internal/service"
 	"github.com/DHBW-Malte/devops-lecture-project/pkg/httpx"
 	"net/http"
 )
