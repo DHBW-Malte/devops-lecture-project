@@ -31,7 +31,7 @@ func ProductDetailHandler(w http.ResponseWriter, r *http.Request) {
 
 	product, ok := service.GetProductByID(id)
 	if !ok {
-		httpx.Error(w, http.StatusNotFound, "Product not found")
+		httpx.Error(w, http.StatusNotFound, "Sorry, product not found")
 		return
 	}
 

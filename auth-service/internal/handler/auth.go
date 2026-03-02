@@ -16,7 +16,7 @@ func AuthLoginHandler(w http.ResponseWriter, r *http.Request) {
 	password := r.FormValue("password")
 
 	if username != "user" || password != "pass" {
-		httpx.Error(w, http.StatusUnauthorized, "Invalid credentials")
+		httpx.Error(w, http.StatusUnauthorized, "Invalid credentials, please try again.")
 		return
 	}
 
