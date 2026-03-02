@@ -3,7 +3,7 @@ name: Publish Docker Images
 on:
   push:
     tags:
-      - "*-[0-9]+.[0-9]+.[0-9]+" # Publish is triggered by push on a release tag like auth-service-1.0.1
+      - "v[0-9]+.[0-9]+.[0-9]+" # Publish is triggered by push on a release tag like auth-service-1.0.1
 
 jobs:
   publish:
