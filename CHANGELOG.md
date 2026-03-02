@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/DHBW-Malte/devops-lecture-project/compare/v0.3.0...v0.3.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* **publish:** publish workflow trigger fixed ([ee772b8](https://github.com/DHBW-Malte/devops-lecture-project/commit/ee772b857831a7e225f9b2a579f5dfb707044cbc))
+* **publish:** publish workflow trigger fixed ([a449643](https://github.com/DHBW-Malte/devops-lecture-project/commit/a449643c7b5f5de629eb87d5115c35f7a5ab194d))
+
 ## [0.3.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/v0.2.0...v0.3.0) (2026-03-02)
 
 
