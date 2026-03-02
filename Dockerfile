@@ -1,5 +1,6 @@
 # STAGE 1: Build
 FROM golang:1.25-alpine AS builder
+ARG service
 
 WORKDIR /src
 
@@ -10,7 +11,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
-RUN go build -o /out/app ./cmd/main.go
+RUN go build -o /out/$(service-service) ./$(service-service)/cmd/main.go
 
 # STAGE 2: Runtime
 FROM alpine:3.20

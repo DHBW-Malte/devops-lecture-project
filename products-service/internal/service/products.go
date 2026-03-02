@@ -1,6 +1,6 @@
 package service
 
-import "github.com/DHBW-Malte/devops-lecture-project/internal/model"
+import "github.com/DHBW-Malte/devops-lecture-project/products-service/internal/model"
 
 var products = []model.Product{
 	{ID: 1, Name: "Office PC", Price: 300.00},

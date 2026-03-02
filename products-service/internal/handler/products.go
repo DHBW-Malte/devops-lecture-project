@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/DHBW-Malte/devops-lecture-project/internal/service"
 	"github.com/DHBW-Malte/devops-lecture-project/pkg/httpx"
+	"github.com/DHBW-Malte/devops-lecture-project/products-service/internal/service"
 )
 
 func ProductListHandler(w http.ResponseWriter, r *http.Request) {
