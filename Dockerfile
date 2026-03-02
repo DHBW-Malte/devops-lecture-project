@@ -22,6 +22,9 @@ RUN apk add --no-cache ca-certificates && update-ca-certificates
 # Running the binary as a non-root user
 RUN adduser -D -H -s /sbin/nologin appuser
 
+WORKDIR /home/appuser
+COPY --from=builder /src/app .
+
 USER appuser
 
 EXPOSE 8080
