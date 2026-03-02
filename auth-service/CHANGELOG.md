@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/DHBW-Malte/devops-lecture-project/compare/auth-service-0.3.0...auth-service-0.3.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* **release:** Minor chenges to trigger a new version build ([0d6dc41](https://github.com/DHBW-Malte/devops-lecture-project/commit/0d6dc41844e47a06c06471c5cd58635df9c75a82))
+* **release:** Minor chenges to trigger a new version build ([84af961](https://github.com/DHBW-Malte/devops-lecture-project/commit/84af9616104579a83a7740b93a067aa8a588d459))
+
 ## [0.3.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/auth-service-0.2.0...auth-service-0.3.0) (2026-03-02)
 
 
