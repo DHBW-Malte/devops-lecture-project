@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/v0.2.0...v0.3.0) (2026-03-02)
+
+
+### Features
+
+* **products:** Add new product and increased ram prices (thanks Altman) ([be145de](https://github.com/DHBW-Malte/devops-lecture-project/commit/be145dec73c0fa2743d4c2a53ebecfce355c009d))
+* **products:** Add new product and increased ram prices (thanks Altman) ([3af2487](https://github.com/DHBW-Malte/devops-lecture-project/commit/3af2487a8284ebaceec628fe2bc39872666eba70))
+
 ## [0.2.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/v0.1.0...v0.2.0) (2026-03-02)
 
 
