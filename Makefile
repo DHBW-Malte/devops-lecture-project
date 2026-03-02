@@ -1,4 +1,5 @@
 GO_CMD = go
+BINARY_NAME = ${service}-main.out
 
 all: build test
 
@@ -6,5 +7,5 @@ test:
 	$(GO_CMD) test -v ./...
 
 build:
-	$(G0_CMD) build -o main ./$(service)/cmd/main.go
+	$(GO_CMD) build -o ${BINARY_NAME} ./$(service)/cmd/main.go
 
