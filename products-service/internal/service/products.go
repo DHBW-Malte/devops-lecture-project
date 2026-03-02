@@ -6,7 +6,7 @@ var products = []model.Product{
 	{ID: 1, Name: "Office PC", Price: 450.00},
 	{ID: 2, Name: "Gaming PC", Price: 900.00},
 	{ID: 3, Name: "Workstation", Price: 1500.00},
-	{ID: 4, Name: "Server", Price: 2500.00},
+	{ID: 4, Name: "Server", Price: 2250.00},
 }
 
 func ListProducts() []model.Product {
