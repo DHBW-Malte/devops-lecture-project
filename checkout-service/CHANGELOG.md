@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/checkout-service-0.2.0...checkout-service-0.3.0) (2026-03-02)
+
+
+### Features
+
+* **checkout:** added checkout thanks message ([89809d7](https://github.com/DHBW-Malte/devops-lecture-project/commit/89809d722db77b653cec24c18d874ed275f34b7e))
+* **checkout:** added checkout thanks message ([672afa2](https://github.com/DHBW-Malte/devops-lecture-project/commit/672afa288ab985f3d5cc7350c4805cb8d98a4039))
+
 ## [0.2.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/checkout-service-0.1.0...checkout-service-0.2.0) (2026-03-02)
 
 
