@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/auth-service-0.2.0...auth-service-0.3.0) (2026-03-02)
+
+
+### Features
+
+* **auth-login:** Added a greeting after login ([36fb113](https://github.com/DHBW-Malte/devops-lecture-project/commit/36fb1133943e7b0ac8c2d128d2a54e2f40f0d1f8))
+* **auth-login:** Added a greeting after login ([2af163d](https://github.com/DHBW-Malte/devops-lecture-project/commit/2af163d6379b267e30bcfbbd47406b71eadbb911))
+
 ## [0.2.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/auth-service-0.1.0...auth-service-0.2.0) (2026-03-02)
 
 
