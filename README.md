@@ -81,10 +81,71 @@ The first workflow get triggered with each push or pull request on our main. Wit
 
 ### Second Workflow - `release-please.yml`
 
-The second one is coming form google. It get triggered with a push on our main. The core-function of it is to check if there were changes in any of the services. If so, release-please is using the format of our commit to generate an release changelog. There it will list all `fix` and `feat` commits with their commit messages. Based on the commits please-release will decide what kind of release it will be. With only `fix` commits the release will be a **patch** release and the version number of the affected service will increased by one at the patch position in the version-number. With a `feat` commit the release would become a **minor** release and with a `feat!` it would be a major (breaking) release.
+The second one is coming form google. It get triggered with a push on our main. The core-function of it is to check if there were changes in any of the services. If so, release-please is using the format of our commit to generate an release changelog. There it will list all `fix` and `feat` commits with their commit messages. Based on the commits please-release will decide what kind of release it will be. With only `fix` commits the release will be a **patch** release and the version number of the affected service will increased by one at the patch position in the version-number. With a `feat` commit the release would become a **minor** release and with a `!feat` it would be a major (breaking) release.
 
 ### Third Workflow - `publish.yml`
 
 The third and last workflow is responsible for the docker image creation and publishing. It get triggered if the release-please changelog & release pr get pushed on the new created release tag, e.g. auth-service-1.2.3. The publish workflow makes also use of this release tag for the next steps, for that it extract the service and the version number out of the tag. Then after the login on Docker Hub, it build and push for every new released service an image. For the build part it is using the Dockerfile which is expecting the service as a build argument. With that the correct image get build and then published on Dockerhub with the new version number.
 
 ---
+
+## Kubernetes-Setup with Minikube
+
+We now also provide a local Kubernetes Cluster for the microservices of our devops-shop backend.
+
+### Prerequisites
+
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download)
+- [kubectl](https://kubernetes.io/docs/reference/kubectl/)
+
+### Manifest Structure
+
+Each microservice has its own manifest file in the `kubernetes/` directory.
+
+Every manifest contains two resources:
+
+1. **Deployment:** Defines which container image to run and how many replicas (pods) to create. Kubernetes ensures the desired number of pods is always running.
+2. **Service:** Provides a stable internal DNS name and load balances incoming traffic across all pods of the deployment.
+
+We choose following numbers of replicas for the services:
+
+- **auth-service:** 4 replicas with the image `dhbwmalte/auth-service:0.3.1`
+- **products-service:** 6 replicas with the image `dhbwmalte/products-service:0.2.1`
+- **checkout-service:** 8 replicas with the image `dhbwmalte/checkout-service:0.3.1`
+
+### Getting Started
+
+Start the Minikube cluster:
+
+```bash
+minikube start
+```
+
+Deploy all services:
+
+```bash
+cd kubernetes
+kubectl apply -f .
+```
+
+Verify that deployments and services are running:
+
+```bash
+kubectl get deployments
+kubestl get services
+```
+
+### Testing a Service Locally
+
+The services use ClusterIP by default, which means they are only reachable from within the cluster. To access a service from your machine, use `kubectl port-forward`:
+
+```bash
+kubectl port-forward service/products-service 8080:8080
+```
+
+Then, in another terminal:
+
+```bash
+curl http://localhost:8080/products
+```
+```
