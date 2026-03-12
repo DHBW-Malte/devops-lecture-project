@@ -82,3 +82,34 @@ func FilterProductHandler(w http.ResponseWriter, r *http.Request) {
 
 	httpx.JSON(w, http.StatusOK, filtered)
 }
+
+func AddProduct(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		httpx.Error(w, http.StatusMethodNotAllowed, "Method not allowed")
+		return
+	}
+
+	name := r.FormValue("name")
+	price := r.FormValue("price")
+
+	if name == "" || price == "" {
+		httpx.Error(w, http.StatusBadRequest, "Please fill out the form completely")
+		return
+	}
+
+	priceF, err := strconv.ParseFloat(price, 64)
+
+	if err != nil {
+		httpx.Error(w, http.StatusBadRequest, "Invalid Price")
+		return
+	}
+
+	newProduct := model.Product{
+		ID:    len(service.Products) + 1,
+		Name:  name,
+		Price: priceF,
+	}
+
+	service.AddProduct(newProduct)
+	httpx.JSON(w, http.StatusOK, "Product was successfully added")
+}

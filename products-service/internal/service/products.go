@@ -36,3 +36,8 @@ func (pr ProductsType) Filter(fn func(model.Product) bool) ProductsType {
 	}
 	return result
 }
+
+func AddProduct(product model.Product) bool {
+	Products = append(Products, product)
+	return true
+}
