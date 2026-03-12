@@ -13,6 +13,7 @@ func main() {
 	// Product Service
 	mux.HandleFunc("/products", handler.ProductListHandler)
 	mux.HandleFunc("/products/{id}", handler.ProductDetailHandler)
+	mux.HandleFunc("POST /products/filter", handler.FilterProductHandler)
 
 	port := 8080
 	log.Printf("Server is running on port %d...\n", port)
