@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/DHBW-Malte/devops-lecture-project/pkg/httpx"
+	"github.com/DHBW-Malte/devops-lecture-project/products-service/internal/model"
 	"github.com/DHBW-Malte/devops-lecture-project/products-service/internal/service"
 )
 
@@ -36,4 +37,48 @@ func ProductDetailHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	httpx.JSON(w, http.StatusOK, product)
+}
+
+func FilterProductHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		httpx.Error(w, http.StatusMethodNotAllowed, "Method not Allowed")
+		return
+	}
+
+	category := r.FormValue("category")
+	filter := r.FormValue("filter")
+	fValue := r.FormValue("value")
+
+	if category != "name" && category != "price" {
+		httpx.Error(w, http.StatusBadRequest, "Invalid Category")
+		return
+	}
+
+	if filter != ">" && filter != "<" && filter != "=" {
+		httpx.Error(w, http.StatusBadRequest, "Invalid filter")
+		return
+	}
+
+	filtered := service.ProductsType{}
+	if category == "name" {
+		filtered = service.Products.Filter(func(product model.Product) bool { return product.Name == fValue })
+	}
+
+	if category == "price" {
+		value, err := strconv.ParseFloat(fValue, 64)
+		if err != nil {
+			httpx.Error(w, http.StatusBadRequest, "Invalid price value")
+			return
+		}
+		switch filter {
+		case "<":
+			filtered = service.Products.Filter(func(product model.Product) bool { return product.Price < value })
+		case ">":
+			filtered = service.Products.Filter(func(product model.Product) bool { return product.Price > value })
+		case "=":
+			filtered = service.Products.Filter(func(product model.Product) bool { return product.Price == value })
+		}
+	}
+
+	httpx.JSON(w, http.StatusOK, filtered)
 }

@@ -6,7 +6,7 @@ import (
 
 type ProductsType []model.Product
 
-var products = ProductsType{
+var Products = ProductsType{
 	{ID: 1, Name: "Office PC", Price: 450.00},
 	{ID: 2, Name: "Gaming PC", Price: 900.00},
 	{ID: 3, Name: "Workstation", Price: 1500.00},
@@ -15,13 +15,13 @@ var products = ProductsType{
 }
 
 func ListProducts() []model.Product {
-	return products
+	return Products
 }
 
 func GetProductByID(id int) (*model.Product, bool) {
-	for i := range products {
-		if products[i].ID == id {
-			return &products[i], true
+	for i := range Products {
+		if Products[i].ID == id {
+			return &Products[i], true
 		}
 	}
 	return nil, false
