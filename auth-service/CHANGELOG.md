@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/DHBW-Malte/devops-lecture-project/compare/auth-service-0.3.1...auth-service-0.3.2) (2026-04-20)
+
+
+### Bug Fixes
+
+* **services:** improved feedback for enduser ([1f7b4d9](https://github.com/DHBW-Malte/devops-lecture-project/commit/1f7b4d98585df864f110ea516355857777a4a584))
+* **services:** improved feedback for enduser ([baf5e4f](https://github.com/DHBW-Malte/devops-lecture-project/commit/baf5e4f1c22db965cedb295f9ab6fd54292c10ee))
+
 ## [0.3.1](https://github.com/DHBW-Malte/devops-lecture-project/compare/auth-service-0.3.0...auth-service-0.3.1) (2026-03-02)
 
 
