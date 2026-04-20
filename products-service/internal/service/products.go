@@ -1,8 +1,12 @@
 package service
 
-import "github.com/DHBW-Malte/devops-lecture-project/products-service/internal/model"
+import (
+	"github.com/DHBW-Malte/devops-lecture-project/products-service/internal/model"
+)
 
-var products = []model.Product{
+type ProductsType []model.Product
+
+var Products = ProductsType{
 	{ID: 1, Name: "Office PC", Price: 450.00},
 	{ID: 2, Name: "Gaming PC", Price: 900.00},
 	{ID: 3, Name: "Workstation", Price: 1500.00},
@@ -11,14 +15,29 @@ var products = []model.Product{
 }
 
 func ListProducts() []model.Product {
-	return products
+	return Products
 }
 
 func GetProductByID(id int) (*model.Product, bool) {
-	for i := range products {
-		if products[i].ID == id {
-			return &products[i], true
+	for i := range Products {
+		if Products[i].ID == id {
+			return &Products[i], true
 		}
 	}
 	return nil, false
+}
+
+func (pr ProductsType) Filter(fn func(model.Product) bool) ProductsType {
+	result := ProductsType{}
+	for _, product := range pr {
+		if fn(product) {
+			result = append(result, product)
+		}
+	}
+	return result
+}
+
+func AddProduct(product model.Product) bool {
+	Products = append(Products, product)
+	return true
 }
