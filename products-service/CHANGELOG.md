@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/DHBW-Malte/devops-lecture-project/compare/products-service-0.3.1...products-service-0.3.2) (2026-04-20)
+
+
+### Bug Fixes
+
+* **products:** add extra product ([124ea9e](https://github.com/DHBW-Malte/devops-lecture-project/commit/124ea9e72588cfc2c4c03d9086b76c95f51db05a))
+* **products:** add extra product ([3dd5867](https://github.com/DHBW-Malte/devops-lecture-project/commit/3dd5867e620e3c7fbe4b269091519e26dccb6602))
+
 ## [0.3.1](https://github.com/DHBW-Malte/devops-lecture-project/compare/products-service-0.3.0...products-service-0.3.1) (2026-04-20)
 
 
