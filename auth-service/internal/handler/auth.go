@@ -34,5 +34,5 @@ func AuthLogoutHandler(w http.ResponseWriter, r *http.Request) {
 		httpx.Error(w, http.StatusMethodNotAllowed, "Method Not Allowed")
 		return
 	}
-	httpx.JSON(w, http.StatusOK, map[string]string{"message": "Logout successful, welcome back!"})
+	httpx.JSON(w, http.StatusOK, map[string]string{"message": "Logout successful, see you soon!"})
 }
