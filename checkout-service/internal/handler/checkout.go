@@ -32,5 +32,5 @@ func CheckoutPlaceOrderHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	httpx.JSON(w, http.StatusOK, map[string]string{"message": "Order placed successfully, thank you for your purchase! We hope to see you soon."})
+	httpx.JSON(w, http.StatusOK, map[string]string{"message": "Order placed successfully, thank you for your purchase!"})
 }

@@ -67,7 +67,7 @@ func FilterProductHandler(w http.ResponseWriter, r *http.Request) {
 	if category == "price" {
 		value, err := strconv.ParseFloat(fValue, 64)
 		if err != nil {
-			httpx.Error(w, http.StatusBadRequest, "Invalid price value")
+			httpx.Error(w, http.StatusBadRequest, "Invalid price value, please give a decimal number")
 			return
 		}
 		switch filter {
