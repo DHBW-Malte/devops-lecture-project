@@ -13,6 +13,7 @@ var Products = ProductsType{
 	{ID: 4, Name: "Server", Price: 2250.00},
 	{ID: 5, Name: "Super Computer", Price: 15000.00},
 	{ID: 6, Name: "Switch", Price: 30.00},
+	{ID: 7, Name: "Raspberry Pi 16GB", Price: 160.00},
 }
 
 func ListProducts() []model.Product {
