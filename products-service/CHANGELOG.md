@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0](https://github.com/DHBW-Malte/devops-lecture-project/compare/products-service-0.2.1...products-service-0.3.0) (2026-04-20)
+
+
+### Features
+
+* **add-product:** Add 'add product' feature to the products service ([9757f46](https://github.com/DHBW-Malte/devops-lecture-project/commit/9757f46cda6af03b93fee8ee6645a995403b7392))
+* **product-filter:** add filter to products ([b4a781b](https://github.com/DHBW-Malte/devops-lecture-project/commit/b4a781b3c3a52a15f5d74d72019f37ac29daf060))
+* **product-filter:** add product filter handler to filter products by name and price ([5a3621e](https://github.com/DHBW-Malte/devops-lecture-project/commit/5a3621eab743e897760f7e38101b5158370ff85f))
+
 ## [0.2.1](https://github.com/DHBW-Malte/devops-lecture-project/compare/products-service-0.2.0...products-service-0.2.1) (2026-03-02)
 
 
