@@ -37,7 +37,7 @@ jobs:
 
       # Generate SBOM from the locally built image
       - name: Generate SBOM
-        uses: anchore/sbom-action@v0.24
+        uses: anchore/sbom-action@v0
         with:
           image: ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.service.outputs.service }}:${{ steps.service.outputs.version }}
           format: cyclonedx-json
