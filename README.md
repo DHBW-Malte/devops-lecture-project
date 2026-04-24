@@ -200,3 +200,78 @@ These are explicitly scoped — no broader permissions are granted.
 | [Syft (anchore/sbom-action)](https://github.com/anchore/sbom-action) | SBOM generation from container image |
 | [Grype (anchore/scan-action)](https://github.com/anchore/scan-action) | CVE scanning of the SBOM |
 | [docker/build-push-action](https://github.com/docker/build-push-action) | Building the image locally before scanning |
+
+## Infrastructure as Code — Kubernetes on Azure
+
+This project provisions a Kubernetes cluster on Microsoft Azure using OpenTofu (an open-source fork of Terraform).
+
+### Prerequisites
+
+- [OpenTofu](https://opentofu.org/docs/intro/install/) (`tofu`)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) (`az`)
+
+### Getting Started
+
+#### 1. Authenticate with Azure
+
+```bash
+az login
+```
+
+Verify your session with:
+
+```bash
+az account show
+```
+
+#### 2. Initialize OpenTofu
+
+```bash
+tofu init
+```
+
+This downloads the required `azurerm` provider plugin into the `.terraform/` folder.
+
+#### 3. Validate the configuration
+
+```bash
+tofu validate
+```
+
+#### 4. Preview the changes
+
+```bash
+tofu plan -var="region=<yourregion>"
+```
+
+For example, `germanywestcentral` for a Germany-based deployment.
+
+#### 5. Apply the configuration
+
+```bash
+tofu apply -var="region=<yourregion>"
+```
+
+Confirm with `yes` when prompted. This will provision:
+- An Azure Resource Group (`rg-kubernetes`)
+- An Azure Kubernetes Cluster (`aks-cluster`)
+
+#### 6. Destroy the resources
+
+```bash
+tofu destroy -var="region=<yourregion>"
+```
+
+### File Structure
+
+| File | Description |
+|------|-------------|
+| `main.tf` | Core configuration — provider, resource group, and AKS cluster |
+| `variables.tf` | Defines the `region` variable for dynamic region selection |
+| `outputs.tf` | Outputs after provisioning, e.g. resource group name |
+
+### Notes
+
+- AKS cluster provisioning takes several minutes — this is expected
+- Available VM sizes vary by region and subscription; check the Azure Portal if you encounter a `400 Bad Request` error during apply
+- The `subscription_id` in `main.tf` must match your Azure subscription
