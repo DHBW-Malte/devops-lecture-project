@@ -149,3 +149,55 @@ Then, in another terminal:
 curl http://localhost:8080/products
 ```
 ```
+
+# DevSecOps – Container Image Scanning
+
+This project implements a **DevSecOps pipeline** following the Shift-Left Security principle. Security scanning is integrated directly into the CI/CD pipeline and acts as a gate before any image is published to Docker Hub.
+
+## How it works
+
+Every release tag push triggers the `Publish Docker Images` workflow. The workflow follows a strict **build → scan → publish** order, ensuring that no vulnerable image ever reaches the registry.
+
+```
+docker build (local) → Generate SBOM → Scan for CVEs → Push to Docker Hub
+```
+
+The push step is only reached if the vulnerability scan passes. If a critical CVE is found, the pipeline aborts and nothing is published.
+
+## SBOM Generation
+
+A **Software Bill of Materials (SBOM)** is generated from the locally built container image using [Syft](https://github.com/anchore/syft) via `anchore/sbom-action`. The SBOM lists every package and dependency inside the image — comparable to an ingredient list.
+
+- Format: `CycloneDX JSON`
+- The SBOM is uploaded as a workflow artifact and attached to the corresponding GitHub Release for auditing purposes.
+
+## Vulnerability Scanning
+
+The generated SBOM is scanned against known CVE databases using [Grype](https://github.com/anchore/grype) via `anchore/scan-action`.
+
+| Setting | Value |
+|---|---|
+| Severity cutoff | `critical` |
+| Fail build on finding | `true` |
+
+Findings below `critical` are reported but do not block the pipeline. Adjust `severity-cutoff` to `high` in `.github/workflows/publish.yml` if stricter enforcement is needed.
+
+## Required Repository Permissions
+
+The workflow requires the following permissions to attach the SBOM to the GitHub Release:
+
+```yaml
+permissions:
+  contents: write
+  actions: write
+```
+
+These are explicitly scoped — no broader permissions are granted.
+
+## Tools Used
+
+| Tool | Purpose |
+|---|---|
+| [Syft (anchore/sbom-action)](https://github.com/anchore/sbom-action) | SBOM generation from container image |
+| [Grype (anchore/scan-action)](https://github.com/anchore/scan-action) | CVE scanning of the SBOM |
+| [docker/build-push-action](https://github.com/docker/build-push-action) | Building the image locally before scanning |
