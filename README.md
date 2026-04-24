@@ -148,7 +148,6 @@ Then, in another terminal:
 ```bash
 curl http://localhost:8080/products
 ```
-```
 
 # DevSecOps – Container Image Scanning
 
@@ -158,7 +157,7 @@ This project implements a **DevSecOps pipeline** following the Shift-Left Securi
 
 Every release tag push triggers the `Publish Docker Images` workflow. The workflow follows a strict **build → scan → publish** order, ensuring that no vulnerable image ever reaches the registry.
 
-```
+```bash
 docker build (local) → Generate SBOM → Scan for CVEs → Push to Docker Hub
 ```
 
